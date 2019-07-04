@@ -20,11 +20,8 @@ public class Yatzy {
 	}
 
 	private static int checkValueAndSum(int valueToCheck, int... dices) {
-		List<Integer> dicesList = new ArrayList<>();
-		for (int i : dices) {
-			dicesList.add(i);
-		}
-		return (int) dicesList.stream().filter(d -> d == valueToCheck).count() * valueToCheck;
+		return (int) Arrays.stream(dices).boxed().collect(Collectors.toList()).stream().filter(d -> d == valueToCheck)
+				.count() * valueToCheck;
 	}
 
 	private static int checkPair(boolean highestPair, int number, int occ, int... values) {
@@ -53,11 +50,7 @@ public class Yatzy {
 	}
 
 	public static int yatzy(int... dice) {
-		Set<Integer> dices = new HashSet<>();
-		for (int i : dice) {
-			dices.add(i);
-		}
-		return dices.size() == 1 ? 50 : 0;
+		return Arrays.stream(dice).boxed().distinct().count() == 1 ? 50 : 0;
 	}
 
 	public static int ones(int d1, int d2, int d3, int d4, int d5) {
